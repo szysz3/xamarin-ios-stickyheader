@@ -8,9 +8,9 @@ Sticky header library for Xamarin.iOS.
 ## Usage 
 
 ```C#
-			StickyHeader stickyHeader = StickyHeader.Create();
-			contentContainer.AddSubview(stickyHeader);
-			stickyHeader.Initialize(StickyHeaderSettings.GetDefault());
+StickyHeader stickyHeader = StickyHeader.Create();
+contentContainer.AddSubview(stickyHeader);
+stickyHeader.Initialize(StickyHeaderSettings.GetDefault());
 ```
 
 ## License
