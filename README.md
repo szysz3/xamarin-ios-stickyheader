@@ -3,7 +3,7 @@ Sticky header library for Xamarin.iOS.
 
 ## Preview
 
-![GIF](https://media.giphy.com/media/l3vR28lv83imRAcdW/giphy.gif)
+![GIF](https://media.giphy.com/media/l2SqfAy5Ej7rj4Ius/giphy.gif)
 
 ## Usage 
 
