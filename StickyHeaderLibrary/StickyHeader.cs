@@ -225,12 +225,12 @@ namespace StickyHeaderLibrary
 
 		private void HideHeader()
 		{
-			AnimateFlyout(minTopCst, parallaxTargetCst, "ShowFlyoutAnimation");
+			AnimateFlyout(minTopCst, parallaxTargetCst, "HideHeaderAnimation");
 		}
 
 		private void ShowHeader()
 		{
-			AnimateFlyout(maxTopCst, minTopCst, "HideFlyoutAnimation");
+			AnimateFlyout(maxTopCst, minTopCst, "ShowHeaderAnimation");
 		}
 
 		private void AnimateFlyout(nfloat contentContainerCst, nfloat stickyHeaderCst, string animationName)
@@ -244,7 +244,7 @@ namespace StickyHeaderLibrary
 			cstStickyHeader.Constant = stickyHeaderCst;
 			cstStickyHeaderOverlay.Constant = stickyHeaderCst;
 
-			stickyHeaderOverlay.Alpha = MaxOverlayAlpha - (cstContentContainer.Constant / maxTopCst); ;
+			stickyHeaderOverlay.Alpha = MaxOverlayAlpha - (cstContentContainer.Constant / maxTopCst);
 
 			SetNeedsLayout();
 			LayoutIfNeeded();
