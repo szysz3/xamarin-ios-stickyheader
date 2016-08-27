@@ -1,4 +1,6 @@
 ﻿using System;
+using UIKit;
+
 namespace StickyHeaderLibrary
 {
 	public class StickyHeaderSettings
@@ -15,13 +17,22 @@ namespace StickyHeaderLibrary
 
 		public nfloat AnimationDuration { get; set; }
 
+		public bool Blur { get; set; }
+
+		public UIBlurEffectStyle BlurStyle { get; set; }
+
+		public bool BlackOverlay { get; set; }
+
 		public static StickyHeaderSettings GetDefault()
 		{
 			return new StickyHeaderSettings()
 			{
 				PanThreshold = 80,
 				ParallaxCoeff = 10,
-				AnimationDuration = 0.3f
+				AnimationDuration = 0.3f,
+				Blur = true,
+				BlurStyle = UIBlurEffectStyle.Light,
+				BlackOverlay = true
 			};
 		}
 	}

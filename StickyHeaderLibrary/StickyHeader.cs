@@ -11,6 +11,7 @@ namespace StickyHeaderLibrary
 		#region Fields
 		private nfloat contentContainerLastPosition;
 		private nfloat stickyHeaderLastPosition;
+		private UIVisualEffectView visualBlurEffectView;
 
 		private CGPoint startPositionInGestureRecognizer;
 
@@ -18,7 +19,7 @@ namespace StickyHeaderLibrary
 		private nfloat maxTopCst;
 		private nfloat parallaxTargetCst;
 
-		private const float MaxOverlayAlpha = 1;
+		private const float MaxAlpha = 1;
 		#endregion
 
 		#region Properties
@@ -53,9 +54,15 @@ namespace StickyHeaderLibrary
 		public void Initialize(StickyHeaderSettings settings)
 		{
 			Settings = settings;
-			SetupConstraints();
+			SetupConstraints(Superview, this);
+			SetupShadows();
 
 			parallaxTargetCst = minTopCst - ((maxTopCst - minTopCst) / Settings.ParallaxCoeff);
+
+			if (settings.Blur)
+			{
+				SetupEffects();
+			}
 		}
 
 		public override void AwakeFromNib()
@@ -65,49 +72,80 @@ namespace StickyHeaderLibrary
 		}
 
 		#region Private methods
-		private void SetupConstraints()
+		private void SetupEffects()
+		{
+			if (Settings.Blur)
+			{
+				var screenWidth = UIApplication.SharedApplication.Windows[0].Frame.Width;
+
+				UIBlurEffect blurEffect = UIBlurEffect.FromStyle(Settings.BlurStyle);
+				visualBlurEffectView = new UIVisualEffectView(blurEffect);
+				visualBlurEffectView.Frame = new CGRect(imgHeader.Frame.Left, imgHeader.Frame.Top, screenWidth, imgHeader.Frame.Height);
+				visualBlurEffectView.Alpha = 0;
+
+				imgHeader.AddSubview(visualBlurEffectView);
+
+				SetNeedsLayout();
+				LayoutIfNeeded();
+			}
+
+			stickyHeaderOverlay.Hidden = !Settings.BlackOverlay;
+		}
+
+		private void SetupShadows()
+		{
+			navBar.Layer.ShadowRadius = 1f;
+			navBar.Layer.ShadowOffset = new CGSize(0, 2);
+			navBar.Layer.ShadowOpacity = 0.5f;
+
+			contentContainer.Layer.ShadowRadius = 10f;
+			contentContainer.Layer.ShadowOffset = new CGSize(0, -3);
+			contentContainer.Layer.ShadowOpacity = 0.3f;
+		}
+
+		private void SetupConstraints(UIView parentView, UIView childView)
 		{
 			TranslatesAutoresizingMaskIntoConstraints = false;
 
-			NSLayoutConstraint left = NSLayoutConstraint.Create(this.Superview,
+			NSLayoutConstraint left = NSLayoutConstraint.Create(parentView,
 				NSLayoutAttribute.Leading,
 				NSLayoutRelation.Equal,
-				this,
+				childView,
 				NSLayoutAttribute.Leading,
 				1,
 				0);
 
-			NSLayoutConstraint right = NSLayoutConstraint.Create(this.Superview,
+			NSLayoutConstraint right = NSLayoutConstraint.Create(parentView,
 				NSLayoutAttribute.Right,
 				NSLayoutRelation.Equal,
-				this,
+				childView,
 				NSLayoutAttribute.Right,
 				1,
 				0);
 
-			NSLayoutConstraint top = NSLayoutConstraint.Create(this.Superview,
+			NSLayoutConstraint top = NSLayoutConstraint.Create(parentView,
 				NSLayoutAttribute.Top,
 				NSLayoutRelation.Equal,
-				this,
+				childView,
 				NSLayoutAttribute.Top,
 				1,
 				0);
 
-			NSLayoutConstraint bottom = NSLayoutConstraint.Create(this.Superview,
+			NSLayoutConstraint bottom = NSLayoutConstraint.Create(parentView,
 				NSLayoutAttribute.Bottom,
 				NSLayoutRelation.Equal,
-				this,
+				childView,
 				NSLayoutAttribute.Bottom,
 				1,
 				0);
 
-			Superview.AddConstraint(left);
-			Superview.AddConstraint(right);
-			Superview.AddConstraint(top);
-			Superview.AddConstraint(bottom);
+			parentView.AddConstraint(left);
+			parentView.AddConstraint(right);
+			parentView.AddConstraint(top);
+			parentView.AddConstraint(bottom);
 
-			Superview.SetNeedsLayout();
-			Superview.LayoutIfNeeded();
+			parentView.SetNeedsLayout();
+			parentView.LayoutIfNeeded();
 		}
 
 		private void SetupStartingCsts()
@@ -155,10 +193,18 @@ namespace StickyHeaderLibrary
 			if (dest > minTopCst && dest < maxTopCst)
 			{
 				cstContentContainer.Constant = contentContainerLastPosition + posY;
-				cstStickyHeader.Constant = stickyHeaderLastPosition + (posY / Settings.ParallaxCoeff);
-				cstStickyHeaderOverlay.Constant = stickyHeaderLastPosition + (posY / Settings.ParallaxCoeff);
 
-				stickyHeaderOverlay.Alpha = MaxOverlayAlpha - (cstContentContainer.Constant / maxTopCst);
+				nfloat stickyHeaderCst = stickyHeaderLastPosition + (posY / Settings.ParallaxCoeff);
+				cstStickyHeader.Constant = stickyHeaderCst;
+				cstStickyHeaderOverlay.Constant = stickyHeaderCst;
+
+				nfloat alpha = MaxAlpha - (cstContentContainer.Constant / maxTopCst);
+				stickyHeaderOverlay.Alpha = alpha;
+
+				if (visualBlurEffectView != null)
+				{
+					visualBlurEffectView.Alpha = alpha;
+				}
 			}
 		}
 
@@ -244,7 +290,13 @@ namespace StickyHeaderLibrary
 			cstStickyHeader.Constant = stickyHeaderCst;
 			cstStickyHeaderOverlay.Constant = stickyHeaderCst;
 
-			stickyHeaderOverlay.Alpha = MaxOverlayAlpha - (cstContentContainer.Constant / maxTopCst);
+			nfloat alpha = MaxAlpha - (cstContentContainer.Constant / maxTopCst);
+			stickyHeaderOverlay.Alpha = alpha;
+
+			if (visualBlurEffectView != null)
+			{
+				visualBlurEffectView.Alpha = MaxAlpha - (cstContentContainer.Constant / maxTopCst);
+			}
 
 			SetNeedsLayout();
 			LayoutIfNeeded();

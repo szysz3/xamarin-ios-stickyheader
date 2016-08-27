@@ -25,6 +25,12 @@ namespace StickyHeaderLibrary
 		UIKit.NSLayoutConstraint cstStickyHeaderOverlay { get; set; }
 
 		[Outlet]
+		UIKit.UIImageView imgHeader { get; set; }
+
+		[Outlet]
+		UIKit.UIView navBar { get; set; }
+
+		[Outlet]
 		UIKit.UIView stickyHeader { get; set; }
 
 		[Outlet]
@@ -35,6 +41,16 @@ namespace StickyHeaderLibrary
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (navBar != null) {
+				navBar.Dispose ();
+				navBar = null;
+			}
+
+			if (contentContainer != null) {
+				contentContainer.Dispose ();
+				contentContainer = null;
+			}
+
 			if (cstContentContainer != null) {
 				cstContentContainer.Dispose ();
 				cstContentContainer = null;
@@ -50,6 +66,16 @@ namespace StickyHeaderLibrary
 				cstStickyHeaderOverlay = null;
 			}
 
+			if (imgHeader != null) {
+				imgHeader.Dispose ();
+				imgHeader = null;
+			}
+
+			if (stickyHeader != null) {
+				stickyHeader.Dispose ();
+				stickyHeader = null;
+			}
+
 			if (stickyHeaderHandle != null) {
 				stickyHeaderHandle.Dispose ();
 				stickyHeaderHandle = null;
@@ -58,16 +84,6 @@ namespace StickyHeaderLibrary
 			if (stickyHeaderOverlay != null) {
 				stickyHeaderOverlay.Dispose ();
 				stickyHeaderOverlay = null;
-			}
-
-			if (contentContainer != null) {
-				contentContainer.Dispose ();
-				contentContainer = null;
-			}
-
-			if (stickyHeader != null) {
-				stickyHeader.Dispose ();
-				stickyHeader = null;
 			}
 		}
 	}

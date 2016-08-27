@@ -32,7 +32,7 @@
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ide-US-aeg" userLabel="StatusBar">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
-                    <color key="backgroundColor" red="0.88161394429999995" green="0.88471276779999997" blue="0.89400923830000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.47843137250000001" green="0.32549019610000002" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="IAv-bM-Azy"/>
                     </constraints>
@@ -47,11 +47,11 @@
                                 <constraint firstAttribute="height" constant="21" id="wnW-Zj-4LO"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" red="0.88161394427078177" green="0.88471276777488117" blue="0.89400923828717949" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.47843137254901957" green="0.32549019607843138" blue="0.42745098039215684" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="gnR-Vb-0ly" firstAttribute="centerY" secondItem="caz-3G-E7R" secondAttribute="centerY" id="OEm-ca-uiH"/>
                         <constraint firstAttribute="height" constant="50" id="SAR-ks-riF"/>
@@ -70,18 +70,18 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rii-Ub-yYT" userLabel="StickyHeaderHandle">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tap and move" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fnT-U4-uEU">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="hold and move" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fnT-U4-uEU">
                                     <rect key="frame" x="113" y="15" width="150" height="21"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="150" id="Xgi-pU-jYe"/>
                                         <constraint firstAttribute="height" constant="21" id="Z2Q-az-JtJ"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
-                                    <color key="textColor" red="0.24144631410256412" green="0.24144631410256412" blue="0.24144631410256412" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
-                            <color key="backgroundColor" red="0.77170096276724753" green="0.77441344831389713" blue="0.78255090495384616" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.56470588235294117" green="0.38823529411764707" blue="0.47843137254901957" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstItem="fnT-U4-uEU" firstAttribute="centerY" secondItem="Rii-Ub-yYT" secondAttribute="centerY" id="9nz-Ae-FH0"/>
                                 <constraint firstItem="fnT-U4-uEU" firstAttribute="centerX" secondItem="Rii-Ub-yYT" secondAttribute="centerX" id="KxY-xO-MPv"/>
@@ -93,7 +93,7 @@
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TuI-GZ-ONN" userLabel="MainContent">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="297"/>
-                                    <color key="backgroundColor" red="0.88161394429999995" green="0.88471276779999997" blue="0.89400923830000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.69803921568627447" green="0.52549019607843139" blue="0.5607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                                 </view>
                             </subviews>
                             <color key="backgroundColor" red="0.88161394429999995" green="0.88471276779999997" blue="0.89400923830000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -145,6 +145,8 @@
                 <outlet property="cstContentContainer" destination="tlj-t4-YOZ" id="IaP-BQ-W3x"/>
                 <outlet property="cstStickyHeader" destination="BJj-CM-zU3" id="mHF-LE-PQB"/>
                 <outlet property="cstStickyHeaderOverlay" destination="UgJ-eh-mQW" id="o73-Aj-ISa"/>
+                <outlet property="imgHeader" destination="HUi-rB-dRQ" id="lUT-cf-RGK"/>
+                <outlet property="navBar" destination="caz-3G-E7R" id="nVR-Pv-3gz"/>
                 <outlet property="stickyHeader" destination="XpI-GI-8Wh" id="6JA-gt-iu0"/>
                 <outlet property="stickyHeaderHandle" destination="Rii-Ub-yYT" id="Psv-H7-ZKl"/>
                 <outlet property="stickyHeaderOverlay" destination="qyF-ZH-fWs" id="w1q-Oq-5xr"/>

@@ -24,6 +24,11 @@ namespace StickyHeaderDemo
 			base.DidReceiveMemoryWarning();
 			// Release any cached data, images, etc that aren't in use.
 		}
+
+		public override UIStatusBarStyle PreferredStatusBarStyle()
+		{
+			return UIStatusBarStyle.LightContent;
+		}
 	}
 }
 
